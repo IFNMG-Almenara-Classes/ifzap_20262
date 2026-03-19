@@ -1,113 +1,19 @@
 import { ContatoType } from "../tipos/types";
 
-const contatos: ContatoType[] = [
-  {
-    nome: "Geovana",
-    telefone: "99999-9999",
-    online: false,
-  },
-  {
-    nome: "Maria",
-    telefone: "88888-8888",
-    online: true,
-  },
-  {
-    nome: "João",
-    telefone: "77777-7777",
-    online: false,
-  },
-  {
-    nome: "João",
-    telefone: "77777-7777",
-    online: false,
-  },
-  {
-    nome: "João",
-    telefone: "77777-7777",
-    online: false,
-  },
-  {
-    nome: "João",
-    telefone: "77777-7777",
-    online: false,
-  },
-  {
-    nome: "João",
-    telefone: "77777-7777",
-    online: false,
-  },
-  {
-    nome: "João",
-    telefone: "77777-7777",
-    online: false,
-  },
-  {
-    nome: "João",
-    telefone: "77777-7777",
-    online: false,
-  },
-  {
-    nome: "João",
-    telefone: "77777-7777",
-    online: false,
-  },
-  {
-    nome: "João",
-    telefone: "77777-7777",
-    online: false,
-  },
-  {
-    nome: "João",
-    telefone: "77777-7777",
-    online: false,
-  },
-  {
-    nome: "João",
-    telefone: "77777-7777",
-    online: false,
-  },
-  {
-    nome: "João",
-    telefone: "77777-7777",
-    online: false,
-  },
-  {
-    nome: "João",
-    telefone: "77777-7777",
-    online: false,
-  },
-  {
-    nome: "João",
-    telefone: "77777-7777",
-    online: false,
-  },
-  {
-    nome: "João",
-    telefone: "77777-7777",
-    online: false,
-  },
-  {
-    nome: "João",
-    telefone: "77777-7777",
-    online: false,
-  },
-  {
-    nome: "João",
-    telefone: "77777-7777",
-    online: false,
-  },
-  {
-    nome: "João",
-    telefone: "77777-7777",
-    online: false,
-  },
-  {
-    nome: "João",
-    telefone: "77777-7777",
-    online: false,
-  },
-];
+const contatos: ContatoType[] = [];
+let proximoId = 1;
 
 export function getContatos(): ContatoType[] {
   return contatos;
+}
+
+export async function criarContato(nome: string, telefone?: string) {
+  const novoContato: ContatoType = {
+    id: proximoId,
+    nome,
+    telefone,
+    online: false,
+  };
+  contatos.push(novoContato);
+  proximoId++;
 }

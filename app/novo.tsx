@@ -1,29 +1,34 @@
 import { useState } from "react";
-import { StyleSheet, Text, TextInput, View } from "react-native";
+import { Button, StyleSheet, Text, TextInput, View } from "react-native";
 
 export default function NovoPage() {
   const [nome, setNome] = useState("");
   const [telefone, setTelefone] = useState("");
 
   return (
-    <View style={{ flex: 1 }}>
-      <Text>Nome: {nome}</Text>
+    <View style={styles.container}>
+      <Text>Nome:</Text>
       <TextInput
         style={styles.input}
         value={nome}
         onChangeText={(novoNome) => setNome(novoNome)}
       />
-      <Text>Telefone: {telefone}</Text>
+      <Text>Telefone:</Text>
       <TextInput
         style={styles.input}
         value={telefone}
         onChangeText={(novoTelefone) => setTelefone(novoTelefone)}
       />
+      <Button title="Salvar" onPress={() => console.log("Salvar contato")} />
     </View>
   );
 }
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    padding: 10,
+  },
   input: {
     borderColor: "#7454cc",
     borderWidth: 1,
