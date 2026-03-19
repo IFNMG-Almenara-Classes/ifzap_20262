@@ -1,9 +1,26 @@
+import { criarContato } from "@/src/api/contatosApi";
+import { useRouter } from "expo-router";
 import { useState } from "react";
 import { Button, StyleSheet, Text, TextInput, View } from "react-native";
 
 export default function NovoPage() {
   const [nome, setNome] = useState("");
   const [telefone, setTelefone] = useState("");
+  const router = useRouter();
+
+  function salvarContato() {
+    criarContato(nome, telefone)
+      .then(() => {
+        alert("Contato criado com sucesso!");
+        router.back();
+      })
+      .catch((error) => {
+        alert("Erro ao criar contato: " + error.message);
+      })
+      .finally(() => {
+        console.log("Operação de criação de contato finalizada.");
+      });
+  }
 
   return (
     <View style={styles.container}>
@@ -19,7 +36,7 @@ export default function NovoPage() {
         value={telefone}
         onChangeText={(novoTelefone) => setTelefone(novoTelefone)}
       />
-      <Button title="Salvar" onPress={() => console.log("Salvar contato")} />
+      <Button title="Salvar" onPress={() => salvarContato()} />
     </View>
   );
 }

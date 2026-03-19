@@ -10,10 +10,11 @@ export function getContatos(): ContatoType[] {
 export async function criarContato(nome: string, telefone?: string) {
   const novoContato: ContatoType = {
     id: proximoId,
-    nome,
-    telefone,
+    nome: nome,
+    telefone: telefone,
     online: false,
   };
   contatos.push(novoContato);
   proximoId++;
+  console.log("CriarContato Executada!");
 }
