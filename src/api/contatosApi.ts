@@ -8,6 +8,9 @@ export function getContatos(): ContatoType[] {
 }
 
 export async function criarContato(nome: string, telefone?: string) {
+  //sleep
+  await new Promise((resolve) => setTimeout(resolve, 3000));
+
   const novoContato: ContatoType = {
     id: proximoId,
     nome: nome,

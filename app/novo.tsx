@@ -6,38 +6,46 @@ import { Button, StyleSheet, Text, TextInput, View } from "react-native";
 export default function NovoPage() {
   const [nome, setNome] = useState("");
   const [telefone, setTelefone] = useState("");
+
+  const [carregando, setCarregando] = useState(false);
   const router = useRouter();
 
-  function salvarContato() {
-    criarContato(nome, telefone)
-      .then(() => {
-        alert("Contato criado com sucesso!");
-        router.back();
-      })
-      .catch((error) => {
-        alert("Erro ao criar contato: " + error.message);
-      })
-      .finally(() => {
-        console.log("Operação de criação de contato finalizada.");
-      });
+  async function salvarContato() {
+    try {
+      setCarregando(true);
+      await criarContato(nome, telefone);
+      router.back();
+    } catch (error) {
+      alert("Erro ao criar contato");
+      setCarregando(false);
+    }
   }
 
   return (
-    <View style={styles.container}>
-      <Text>Nome:</Text>
-      <TextInput
-        style={styles.input}
-        value={nome}
-        onChangeText={(novoNome) => setNome(novoNome)}
-      />
-      <Text>Telefone:</Text>
-      <TextInput
-        style={styles.input}
-        value={telefone}
-        onChangeText={(novoTelefone) => setTelefone(novoTelefone)}
-      />
-      <Button title="Salvar" onPress={() => salvarContato()} />
-    </View>
+    <>
+      {!carregando && (
+        <View style={styles.container}>
+          <Text>Nome:</Text>
+          <TextInput
+            style={styles.input}
+            value={nome}
+            onChangeText={(novoNome) => setNome(novoNome)}
+          />
+          <Text>Telefone:</Text>
+          <TextInput
+            style={styles.input}
+            value={telefone}
+            onChangeText={(novoTelefone) => setTelefone(novoTelefone)}
+          />
+          <Button title="Salvar" onPress={() => salvarContato()} />
+        </View>
+      )}
+      {carregando && (
+        <View>
+          <Text>Salvando contato...</Text>
+        </View>
+      )}
+    </>
   );
 }
 
