@@ -1,16 +1,15 @@
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { ContatoType } from "../tipos/types";
 
-const contatos: ContatoType[] = [];
-let proximoId = 1;
-
 export async function getContatos(): Promise<ContatoType[]> {
-  await new Promise((resolve) => setTimeout(resolve, 3000));
+  const contatosString = await AsyncStorage.getItem("contatos");
+  const contatos = JSON.parse(contatosString || "[]") as ContatoType[];
   return contatos;
 }
 
 export async function criarContato(nome: string, telefone?: string) {
-  //sleep
-  await new Promise((resolve) => setTimeout(resolve, 3000));
+  const contatos = await getContatos();
+  const proximoId = contatos.length + 1;
 
   const novoContato: ContatoType = {
     id: proximoId,
@@ -19,6 +18,6 @@ export async function criarContato(nome: string, telefone?: string) {
     online: false,
   };
   contatos.push(novoContato);
-  proximoId++;
+  await AsyncStorage.setItem("contatos", JSON.stringify(contatos));
   console.log("CriarContato Executada!");
 }
