@@ -3,7 +3,8 @@ import { ContatoType } from "../tipos/types";
 const contatos: ContatoType[] = [];
 let proximoId = 1;
 
-export function getContatos(): ContatoType[] {
+export async function getContatos(): Promise<ContatoType[]> {
+  await new Promise((resolve) => setTimeout(resolve, 3000));
   return contatos;
 }
 
