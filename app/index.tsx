@@ -1,8 +1,8 @@
 import { getContatos } from "@/src/api/contatosApi";
 import Contato from "@/src/componentes/Contato";
 import { ContatoType } from "@/src/tipos/types";
-import { useRouter } from "expo-router";
-import { useEffect, useState } from "react";
+import { useFocusEffect, useRouter } from "expo-router";
+import { useState } from "react";
 import { Button, FlatList, Text, View } from "react-native";
 
 export default function Index() {
@@ -16,16 +16,18 @@ export default function Index() {
     setCarregando(false);
   }
 
-  useEffect(() => {
+  useFocusEffect(() => {
     carregarContatos();
-    console.log("useEffect executada!");
-  }, []);
+  });
 
   const router = useRouter();
 
   return (
     <View style={{ flex: 1 }}>
-      <Button title="Novo contato" onPress={() => router.navigate("/novo")} />
+      <Button
+        title="Novo contato"
+        onPress={() => router.navigate("/contato/novo")}
+      />
       {!carregando && (
         <FlatList
           data={contatos}

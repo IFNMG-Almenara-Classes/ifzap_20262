@@ -1,5 +1,6 @@
 import { ContatoType } from "@/src/tipos/types";
-import { StyleSheet, Text, View } from "react-native";
+import FontAwesome from "@expo/vector-icons/FontAwesome";
+import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import Avatar from "./Avatar";
 
 type ContatoProps = {
@@ -16,6 +17,11 @@ export default function Contato({ contato }: ContatoProps) {
           {contato.telefone || "Telefone não informado"}
         </Text>
         <Text>{contato.online ? "Online" : "Offline"}</Text>
+      </View>
+      <View>
+        <TouchableOpacity>
+          <FontAwesome name="pencil-square-o" size={24} color="black" />
+        </TouchableOpacity>
       </View>
     </View>
   );
