@@ -5,9 +5,10 @@ import Avatar from "./Avatar";
 
 type ContatoProps = {
   contato: ContatoType;
+  onEditar: () => void;
 };
 
-export default function Contato({ contato }: ContatoProps) {
+export default function Contato({ contato, onEditar }: ContatoProps) {
   return (
     <View style={styles.container1}>
       <Avatar aoTocar={() => alert(contato.nome)} />
@@ -19,7 +20,7 @@ export default function Contato({ contato }: ContatoProps) {
         <Text>{contato.online ? "Online" : "Offline"}</Text>
       </View>
       <View>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={onEditar}>
           <FontAwesome name="pencil-square-o" size={24} color="black" />
         </TouchableOpacity>
       </View>

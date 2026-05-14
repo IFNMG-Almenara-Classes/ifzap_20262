@@ -32,7 +32,11 @@ export default function Index() {
         <FlatList
           data={contatos}
           renderItem={({ item, index }) => (
-            <Contato key={index} contato={item} />
+            <Contato
+              key={index}
+              contato={item}
+              onEditar={() => router.navigate(`/contato/${item.id}`)}
+            />
           )}
         />
       )}

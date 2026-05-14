@@ -1,9 +1,12 @@
+import { useLocalSearchParams } from "expo-router";
 import { Text, View } from "react-native";
 
 export default function EditarPage() {
+  const { id } = useLocalSearchParams();
+
   return (
     <View>
-      <Text>Editando</Text>
+      <Text>Editando {id}</Text>
     </View>
   );
 }
