@@ -21,3 +21,12 @@ export async function criarContato(nome: string, telefone?: string) {
   await AsyncStorage.setItem("contatos", JSON.stringify(contatos));
   console.log("CriarContato Executada!");
 }
+
+export async function getContato(id: number): Promise<ContatoType> {
+  const contatos = await getContatos();
+  const contato = contatos.find((c) => c.id === id);
+  if (!contato) {
+    throw new Error("Contato não encontrado");
+  }
+  return contato;
+}
