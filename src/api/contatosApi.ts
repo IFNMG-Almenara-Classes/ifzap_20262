@@ -30,3 +30,15 @@ export async function getContato(id: number): Promise<ContatoType> {
   }
   return contato;
 }
+
+export async function atualizarContato(contato: ContatoType) {
+  const contatos = await getContatos();
+  const contatoBanco = contatos.find((c) => c.id === contato.id);
+  if (!contatoBanco) {
+    throw new Error("Contato não encontrado");
+  }
+  contatoBanco.nome = contato.nome;
+  contatoBanco.telefone = contato.telefone;
+  contatoBanco.online = contato.online;
+  await AsyncStorage.setItem("contatos", JSON.stringify(contatos));
+}
